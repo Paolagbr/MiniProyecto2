@@ -4,6 +4,7 @@ import { UnProductoComponent } from './un-producto/un-producto.component';
 import { CarruselComponent } from './components/carrusel/carrusel.component';
 import { NosotrosComponent } from './nosotros/nosotros.component';
 import { FormularioReactivoComponent } from './components/formulario-reactivo/formulario-reactivo.component';
+import { CitaComponent } from './cita/cita.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/inicio', pathMatch: 'full' },
@@ -11,5 +12,6 @@ export const routes: Routes = [
     {path:'Tienda', component: TiendaComponent},
     {path:'Tienda/:id', component: UnProductoComponent},
     {path: 'Nosotros', component: NosotrosComponent },
+    {path: 'Contacto', component: CitaComponent},
     {path: 'formulario-reactivo', component: FormularioReactivoComponent}
 ];
