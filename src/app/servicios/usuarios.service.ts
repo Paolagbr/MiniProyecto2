@@ -41,4 +41,14 @@ export class UsuariosService {
      hora:''
     };
   }
+  /*Editar la parte del localStorage*/
+  eliminarUsuario(usuario: userInfo) {
+    this.userINFO = this.userINFO.filter(u => u !== usuario);
+    localStorage.setItem('data', JSON.stringify(this.userINFO));
+  }
+
+  actualizarUsuarios(usuarios: userInfo[]) {
+    this.userINFO = usuarios;
+    localStorage.setItem('data', JSON.stringify(this.userINFO));
+  }
 }

@@ -1,0 +1,151 @@
+<mat-radio-group [(ngModel)]="selectedOption" aria-label="Select an option" class="menu-radio flex flex-col gap-2 mb-6">
+  @for (option of options; track option.value) {
+    <mat-radio-button [value]="option.value">
+      {{ option.label }}
+    </mat-radio-button>
+  }
+</mat-radio-group>
+
+<!-- OPCIÓN 1: AGENDAR CITA -->
+@if (selectedOption === '1') {
+  <form class="formulario-cita" [ngFormOptions]="{ updateOn: 'blur' }" #form="ngForm">
+    <h2 class="titulo">AGENDAR CITA</h2>
+
+    <!-- Nombre -->
+    <div class="campo">
+      <label class="label-genero">Nombre:</label>
+      <mat-form-field appearance="fill">
+        <mat-label>Nombre</mat-label>
+        <input matInput type="text" placeholder="Ingresa tu nombre" [(ngModel)]="userINFO.name" name="nombre"
+               #nameControl="ngModel" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$" required minlength="1">
+      </mat-form-field>
+
+      @if (nameControl.touched && nameControl.hasError('required')) {
+        <div class="text-error">El campo es requerido</div>
+      }
+      @if (nameControl.hasError('pattern')) {
+        <div class="text-error">No se permiten números y símbolos</div>
+      }
+    </div>
+
+    <!-- Servicio -->
+    <div class="campo">
+      <label class="label-genero">Servicio:</label>
+      <mat-form-field appearance="fill">
+        <mat-label>Servicio</mat-label>
+        <mat-select [(ngModel)]="userINFO.grupo" name="grupo" required #grupoSelect="ngModel"
+                    (selectionChange)="guardarServicio($event)">
+          <mat-option value="">-- Elige un servicio --</mat-option>
+          @for (grupo of grupos; track grupo) {
+            <mat-option [value]="grupo.nomServicio">{{ grupo.nomServicio }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      @if (grupoSelect.touched && grupoSelect.hasError('required')) {
+        <div class="text-error">El campo es requerido</div>
+      }
+    </div>
+
+    <!-- Sexo -->
+    <div class="campo cam">
+      <label class="label-genero">Sexo:</label>
+      <mat-radio-group [(ngModel)]="userINFO.sexo" name="genero" #genero="ngModel" required>
+        <mat-radio-button value="Femenino">Femenino</mat-radio-button>
+        <mat-radio-button value="Masculino">Masculino</mat-radio-button>
+      </mat-radio-group>
+
+      @if (genero.touched && genero.hasError('required')) {
+        <div class="text-error">El campo es requerido</div>
+      }
+    </div>
+
+    <!-- Fecha -->
+    <div class="campo">
+      <label class="label-genero">Fecha:</label>
+      <mat-form-field appearance="fill">
+        <mat-label>Fecha de la cita: </mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="userINFO.fechaCita" name="fecha" required
+               [matDatepickerFilter]="myFilter" (dateChange)="guardarFecha($event)" #fecha="ngModel">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      @if (fecha.touched && fecha.hasError('required')) {
+        <div class="text-error">El campo es requerido</div>
+      }
+    </div>
+
+    <!-- Hora -->
+    <div class="campo">
+      <label class="label-genero">Hora:</label>
+      <mat-form-field appearance="fill">
+        <mat-label>Hora</mat-label>
+        <mat-select [(ngModel)]="userINFO.hora" name="hora" required #hora="ngModel"
+                    (selectionChange)="guardarHora($event)">
+          @for (hora of horas; track hora) {
+            <mat-option [value]="hora.horaC" [disabled]="horasOcupadas.includes(hora.horaC)">
+              {{ hora.horaC }}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      @if (hora.touched && hora.hasError('required')) {
+        <div class="text-error">El campo es requerido</div>
+      }
+    </div>
+
+    <!-- Botón -->
+    <div class="boton-contenedor">
+      <button mat-raised-button color="accent" (click)="actualizarUsuario()" [disabled]="!form.valid"
+              [ngClass]="form.valid ? 'btn-activo' : 'btn-inactivo'">
+        Guardar cambios
+      </button>
+    </div>
+  </form>
+
+  <!-- Tabla de citas -->
+  <div id="container2">
+    <h2>Listado de Citas</h2>
+
+    @if (!listaCitas.length) {
+      <div>No hay citas por el momento</div>
+    } @else {
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Grupo</th>
+            <th>Sexo</th>
+            <th>Fecha de cita</th>
+            <th>Hora</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (u of listaCitas; track u.name) {
+            <tr>
+              <td>{{ u.name }}</td>
+              <td>{{ u.grupo }}</td>
+              <td>{{ u.sexo }}</td>
+              <td>{{ u.fechaCita }}</td>
+              <td>{{ u.hora }}</td>
+              <td>
+                <button (click)="editarUsuario(u)">Editar</button>
+                <button (click)="eliminarUsuario(u)">Borrar</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  </div>
+} @else {
+  @if (selectedOption === '2') {
+    <div class="bg-white p-4 rounded-lg shadow border">
+      <h2 class="text-xl font-bold mb-4">Formulario 2</h2>
+      <p>Contenido del segundo formulario.</p>
+    </div>
+  }
+}
