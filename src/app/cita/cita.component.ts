@@ -40,8 +40,8 @@ export class CitaComponent {
   constructor(private usuariosService: UsuariosService) { }
 
   ngOnInit() {
-    // this.userINFO = this.usuariosService.nuevoUsuario();
-    this.cargarDatosGuardados();
+     this.userINFO = this.usuariosService.nuevoUsuario();
+    //this.cargarDatosGuardados();
     this.grupos = this.usuariosService.getlista();
     this.horas = HORA; 
   }
