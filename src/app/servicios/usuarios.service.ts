@@ -51,4 +51,25 @@ export class UsuariosService {
     this.userINFO = usuarios;
     localStorage.setItem('data', JSON.stringify(this.userINFO));
   }
+  private localStorageKey = "data";
+   private saveUsuariosToLocalStorage(): void {
+      localStorage.setItem(this.localStorageKey, JSON.stringify(this.userINFO));
+  }
+  updateUsuario(originalName: string, updatedUserData: userInfo): boolean {
+     
+      const index = this.userINFO.findIndex(u => u && u.name === originalName);
+
+      if (index !== -1) {
+         
+          this.userINFO[index] = { ...updatedUserData }; 
+          this.saveUsuariosToLocalStorage();
+
+          console.log('Servicio: Usuario actualizado exitosamente:', updatedUserData.name);
+          return true; 
+      } else {
+          console.error('Servicio: No se encontró el usuario para actualizar (nombre:', originalName, ')');
+          return false; 
+      }
+  }
+
 }
