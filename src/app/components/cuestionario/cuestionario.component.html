@@ -1,0 +1,116 @@
+<div class="card">
+    <h1 class="title">Quejas y Sugerencias</h1>
+    <div class="card-body">
+      <form (ngSubmit)="enviarComentario()" [formGroup]="formulario">
+        
+        <!-- Nombre -->
+        <div class="mb-2">
+          <label class="form-label">Nombre</label>
+          <input type="text" formControlName="nombre" class="form-control" placeholder="Ingresa tu nombre">
+          <div *ngIf="!formulario.get('nombre')?.valid && !formulario.get('nombre')?.pristine" class="alert alert-danger mt-2">
+            El nombre es obligatorio
+          </div>
+        </div>
+  
+        <!-- Email -->
+        <div class="mb-2">
+          <label class="form-label">Email</label>
+          <input type="email" formControlName="email" class="form-control" placeholder="Ingresa tu email">
+          <div *ngIf="!formulario.get('email')?.valid && !formulario.get('email')?.pristine" class="alert alert-danger mt-2">
+            <span *ngIf="formulario.get('email')?.errors?.['required']">El email es obligatorio</span>
+            <span *ngIf="formulario.get('email')?.errors?.['email']">El email debe ser válido</span>
+          </div>
+        </div>
+
+        <!-- Parte de checkbox -->
+        <label class="form-label">¿Qué fue lo que más te gustó de la página?</label><br>
+        <div formGroupName="feedback">
+            <input type="checkbox" formControlName="facilidadNavegar" /> Facilidad de navegar
+            <br>
+            <input type="checkbox" formControlName="buenaPresentacion" /> Buena presentación
+            <br>
+            <input type="checkbox" formControlName="facilEntender" /> Fácil de entender los servicios
+            <br>
+            <input type="checkbox" formControlName="estructuraUtilizada" /> La estructura que se utilizó
+            <br>
+        </div>
+      
+        <!-- Lista despegable -->
+         <!-- <select formControlName="servicio" id="lang">
+            <option value="" disabled selected>Selecciona una opción</option>
+            <option value="Masaje">Masaje corporal</option>
+            <option value="Facial">Facial</option>
+            <option value="Sauna">Sauna</option>
+            <option value="Aromaterapia">Aromaterapia</option>
+            <option value="Pies">Masaje en pies y manos</option>
+            <option value="Relax">Sala de relajación</option>
+            <option value="Atencion">Atención al cliente</option>
+        </select> -->
+
+        <label for="lang">Servicio que más te gustó</label>
+        <br>
+        <select formControlName="servicio" id="lang">
+          <option value="" disabled selected>Selecciona una opción</option>
+          <option value="Masaje Corporal">Masaje corporal</option>
+          <option value="Facial">Facial</option>
+          <option value="Sauna">Sauna</option>
+          <option value="Aromaterapia">Aromaterapia</option>
+          <option value="Masaje para Pies y Manos">Masaje en pies y manos</option>
+          <option value="Sala de Relajación">Sala de relajación</option>
+          <option value="Atencion al cliente">Atención al cliente</option>
+        </select>
+        
+      
+        <!-- Mensaje -->
+        <div class="mb-2">
+          <label class="form-label">Mensaje de queja o sugerencia</label>
+          <textarea formControlName="mensaje" class="form-control" placeholder="Escribe tu queja o sugerencia aquí" rows="5"></textarea>
+          <div *ngIf="!formulario.get('mensaje')?.valid && !formulario.get('mensaje')?.pristine" class="alert alert-danger mt-2">
+            El mensaje es obligatorio y debe tener al menos 10 caracteres
+          </div>
+        </div>
+
+        <!-- Fecha -->
+        <div class="campo">
+            <label class="label-genero">¿En qué fecha volverías a venir?</label>
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>Fecha de la cita: </mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="fechaCita" required
+                    [matDatepickerFilter]="myFilter">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <div *ngIf="formulario.get('fechaCita')?.touched && formulario.get('fechaCita')?.hasError('required')" class="text-error">El campo es requerido</div>
+        </div>
+
+  
+        <button class="btn btn-primary" type="submit">Enviar comentario</button>
+      </form>
+
+      <!-- Comentarios impresos. -->
+        <div *ngFor="let comentario of comentarios; let i = index" class="comentario-card">
+          <p><strong> Nombre:</strong> {{comentario.nombre}}</p>
+          <p><strong>📧 Email:</strong> {{comentario.email}}</p>
+
+          <p><strong> Te gustó de la página:</strong></p>
+          <ul class="feedback-list">
+            <li *ngIf="comentario.feedback?.facilidadNavegar">✔️ Facilidad de navegar</li>
+            <li *ngIf="comentario.feedback?.buenaPresentacion">✔️ Buena presentación</li>
+            <li *ngIf="comentario.feedback?.facilEntender">✔️ Fácil de entender los servicios</li>
+            <li *ngIf="comentario.feedback?.estructuraUtilizada">✔️ La estructura que se utilizó</li>
+          </ul>
+
+          <p><strong>⭐ Servicio que más te gustó:</strong> {{comentario.servicio}}</p>
+          <p><strong>📝 Mensaje:</strong> {{comentario.mensaje}}</p>
+          <p><strong>📅 Fecha:</strong> {{comentario.fechaCita | date:'fullDate'}}</p>
+
+          <div class="botones">
+            <button (click)="editarComentario(i)" class="btn-editar">✏️ Editar</button>
+            <button (click)="eliminarComentario(i)" class="btn-eliminar">🗑️ Eliminar</button>
+          </div>
+        </div>
+
+
+    </div>
+</div>

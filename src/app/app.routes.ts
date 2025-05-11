@@ -7,6 +7,7 @@ import { FormularioReactivoComponent } from './components/formulario-reactivo/fo
 import { CitaComponent } from './cita/cita.component';
 import { IngresarComponent } from './ingresar/ingresar.component';
 import { MenuComponent } from './menu/menu.component';
+import { CuestionarioComponent } from './components/cuestionario/cuestionario.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/inicio', pathMatch: 'full' },
@@ -16,6 +17,7 @@ export const routes: Routes = [
     {path: 'Nosotros', component: NosotrosComponent },
     {path: 'Contacto', component: CitaComponent},
     {path: 'formulario-reactivo', component: FormularioReactivoComponent},
-     {path: 'sesion', component: IngresarComponent},
-    {path: 'menu', component: MenuComponent}
+    {path: 'sesion', component: IngresarComponent},
+    {path: 'menu', component: MenuComponent},
+    {path: 'Cuestionario', component: CuestionarioComponent}
 ];
