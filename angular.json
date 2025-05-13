@@ -52,7 +52,9 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "baseHref": "/MiniProyecto2/"
+
             },
             "development": {
               "optimization": true,
