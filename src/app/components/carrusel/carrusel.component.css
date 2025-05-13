@@ -77,11 +77,11 @@
 
 .custom-caption {
   position: absolute;
-  top: 90%;
-  left: 50%;
+  top: 50%;
+  left: 80%;
   transform: translate(-50%, -50%);
   /*background: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente */
-  color: #7b241c;
+  color: white;
   padding: 20px;
   border-radius: 12px;
   text-align: center;
