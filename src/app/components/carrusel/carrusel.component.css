@@ -1,6 +1,6 @@
 @font-face{
   font-family: 'Letra';
-  src: url('letraC.ttf');
+  src: url('/letraC.ttf');
 }
 /* .carousel-item img {
     max-height: 500px;
