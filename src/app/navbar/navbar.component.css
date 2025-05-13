@@ -8,9 +8,10 @@
 }
 .letra{
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: bold;
     color:black;
+
 }
 .letra a:hover{
     color: blueviolet;
