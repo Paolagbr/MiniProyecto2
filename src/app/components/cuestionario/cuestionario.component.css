@@ -161,3 +161,37 @@
 .btn-eliminar:hover {
   background-color: #9b59b6;
 }
+
+
+.carousel-item {
+  position: relative;
+}
+
+.custom-caption {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /*background: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente */
+  color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 80%;
+}
+
+.custom-caption h5 {
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+}
+
+.custom-caption p {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.lema{
+  font-family: cursive;
+  font-size: 30px;
+  border-color: black;
+}
