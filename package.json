@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "deploy": "ng build --configuration production && npx angular-cli-ghpages --dir=dist/MiniProyecto2",
+    "build": "ng build --configuration production",
+    "deploy": "npm run build && npx angular-cli-ghpages --dir=dist/MiniProyecto2",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

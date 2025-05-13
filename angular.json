@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/mini-proyecto-angular",
+            "outputPath": "dist/MiniProyecto2",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -54,7 +54,6 @@
               ],
               "outputHashing": "all",
               "baseHref": "/MiniProyecto2/"
-
             },
             "development": {
               "optimization": true,
@@ -104,5 +103,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "8126a1eb-ae0c-46b4-87fa-eb724b0b4843"
   }
 }
